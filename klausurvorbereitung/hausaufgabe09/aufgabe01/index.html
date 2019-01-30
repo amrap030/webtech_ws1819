@@ -1,0 +1,29 @@
+<!doctype html>
+<p id="balloon">🎈</p>
+<script>
+    let balloon = document.getElementById("balloon");
+    let balloonSize = 10;
+    balloon.style.fontSize = balloonSize + "px";
+
+    function changeSize(size) {
+        balloonSize = size;
+        balloon.style.fontSize = balloonSize + "px";
+    }
+
+    function ArrowUpPress(event) {
+        if (event.key == "ArrowUp") {
+            changeSize(balloonSize + 10)
+            event.preventDefault(); //prevent ArroDown to do its normal scrolling behaviour
+            if (balloonSize > 70) {
+                balloon.replaceChild(document.createTextNode("💥"), balloon.firstChild)
+                window.removeEventListener("keydown", ArrowUpPress);
+            }
+        }
+        if (event.key == "ArrowDown") {
+            changeSize(balloonSize - 10)
+            event.preventDefault(); //prevent ArroDown to do its normal scrolling behaviour
+        }
+    }
+
+    window.addEventListener("keydown", ArrowUpPress)
+</script>
