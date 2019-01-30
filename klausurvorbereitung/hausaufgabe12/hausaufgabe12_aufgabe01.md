@@ -135,7 +135,7 @@ Diese definieren die Abhängigkeiten des Modules, die via NPM möglich sind und 
 
 ### **devDependencies**
 
-Hier werden die referenzierten Module definiert, die für die Entwicklung an diesem Modul notwendig sind. Beispielsweise betrifft dies Abhängigkeiten zu Testing-Modulen, die für die Entwicklung notwendig, für die Verwendung jedoch unerheblich sind. Standardmäßig werden alle Abhängigkeiten installiert. Um sicher zu gehen, dass die für die Entwicklung notwendigen Abhängigkeiten nicht installiert werden, sollte das Modul mit folgendem Aufruf installiert werden:
+Hier werden die referenzierten Module definiert, die für die Entwicklung an diesem Modul notwendig sind. Beispielsweise betrifft dies Abhängigkeiten zu Testing-Modulen, die für die Entwicklung notwendig, für die Verwendung jedoch unerheblich sind. Standardmäßig werden alle Abhängigkeiten installiert. Um sicher zu gehen, dass die für die Entwicklung notwendigen Abhängigkeiten **nicht installiert** werden, sollte das Modul mit folgendem Aufruf installiert werden:
 
 ```
 $ npm install –production
@@ -178,7 +178,7 @@ veröffentlicht werden. Wahlweise kann auch eine Url oder ein Tar-Archiv verwend
 
 ### **Semantic Versioning**
 
-Um das JavaScript-Ökosystem zuverlässig und sicher zu halten, wird bei jeder wichtigen Aktualisierung eines eigenen npm-Pakets eine neue Version des Pakets mit einer aktualisierten Versionsnummer in der package.json Datei veröffentlichent, die der semantischen Versionierungsspezifikation folgt.
+Um das JavaScript-Ökosystem zuverlässig und sicher zu halten, wird bei jeder wichtigen Aktualisierung eines eigenen npm-Pakets eine neue Version des Pakets mit einer aktualisierten Versionsnummer in der package.json Datei veröffentlicht, die der semantischen Versionierungsspezifikation folgt.
 Das Befolgen der semantischen Versionierungsspezifikation hilft anderen Entwicklern, die auf Ihren Code angewiesen sind, den Umfang der Änderungen in einer bestimmten Version zu verstehen und ihren eigenen Code gegebenenfalls anzupassen.
 
 | Code-Status |	Bühne |	Regel |	Beispielversion |
