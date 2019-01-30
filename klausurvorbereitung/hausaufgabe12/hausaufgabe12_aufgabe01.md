@@ -122,7 +122,7 @@ Neben Angaben zum Namen, Beschreibung, Autor, Version, Lizenz und Keywords des M
 
 ### **Dependencies**
 
-Diese definieren die Abhängigkeiten des Modules, die via NPM möglich sind und zusammen mit dem Modul installiert werden sollen. Für die Angabe der abhängige Version stehen mehrere Varianten zur Verfügung:
+Diese definieren die Abhängigkeiten des Modules, die via NPM möglich sind und zusammen mit dem Modul installiert werden sollen. Für die Angabe der abhängigen Version stehen mehrere Varianten zur Verfügung:
 
 - version: Muss exakt version entsprechen
 - =version: Entspricht version

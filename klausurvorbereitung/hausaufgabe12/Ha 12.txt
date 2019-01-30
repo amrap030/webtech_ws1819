@@ -1,0 +1,111 @@
+HA 12:
+• Was bedeutet asynchrone Programmierung im Sinne von JavaScript?
+JavaScript-Engines basieren auf dem Konzept einer Singlethread-Ereignisschleife. 
+Single-Threaded bedeutet, dass immer nur ein Code ausgeführt wird.
+Andere Sprachen wie Java oder C ++, können Threads mehrere verschiedene 
+Codeabschnitte gleichzeitig ausführen. 
+
+JavaScript-Engines können jeweils nur einen Teil des Codes ausführen.
+Daher muss der Code verfolgt werden, der ausgeführt werden soll.
+Dieser Code wird in einer Job-Queue gespeichert. Immer wenn ein Code zur Ausführung bereit ist, 
+wird er zur Job-Queue hinzugefügt. Wenn die JavaScript-Engine die Ausführung des Codes abgeschlossen hat, 
+führt die Ereignisschleife den nächsten Job in der Job-Queue aus. Die Ereignisschleife ist ein Prozess 
+innerhalb der JavaScript-Engine, der die Codeausführung überwacht und die Job-Queue verwaltet. 
+
+
+• Wie funktioniert die asynchrone Programmierung (meistens) im Browser und was sind die
+Nachteile dieser einfachen Variante?
+
+
+• Wie funktioniert das Callback-Pattern? Was ist der Vorteil im Gegensatz zur vorherigen
+Variante? Was ist die error-first Konvention? Was versteht man unter der Callback Hell?
+Was sind die Nachteile von Callbacks?
+
+Callback-Funktionen sind Funktionen, die anderen Funktionen als Parameter übergeben und von diesen aufgerufen werden
+z.B. : 
+doSomething (Callback){
+....
+Callback();
+......
+}
+error-first-konvention:
+Das erste Argument des Callbacks ist für ein Fehlerobjekt reserviert. 
+Wenn ein Fehler aufgetreten ist, wird er vom ersten err-Argument zurückgegeben.
+Das zweite Argument des Rückrufs ist für alle erfolgreichen Antwortdaten reserviert. 
+Wenn kein Fehler aufgetreten ist, wird err auf null gesetzt und alle erfolgreichen Daten werden im zweiten Argument zurückgegeben.
+
+fs.readFile('/foo.txt', function(err, data) {
+  // If an error occurred, handle it (throw, propagate, etc)
+  if(err) {
+    console.log('Unknown Error');
+    return;
+  }
+  // Otherwise, log the file contents
+  console.log(data);
+});
+
+Callback-Hell:
+fs.readdir(source, function (err, files) {
+  if (err) {
+    console.log('Error finding files: ' + err)
+  } else {
+    files.forEach(function (filename, fileIndex) {
+      console.log(filename)
+      gm(source + filename).size(function (err, values) {
+        if (err) {
+          console.log('Error identifying file size: ' + err)
+        } else {
+          console.log(filename + ' : ' + values)
+          aspect = (values.width / values.height)
+          widths.forEach(function (width, widthIndex) {
+            height = Math.round(width / aspect)
+            console.log('resizing ' + filename + 'to ' + height + 'x' + height)
+            this.resize(width, height).write(dest + 'w' + width + '_' + filename, function(err) {
+              if (err) console.log('Error writing file: ' + err)
+            })
+          }.bind(this))
+        }
+      })
+    })
+  }
+})
+
+Nachteile: 
+große Programme werden schnell unübersichtlich.
+
+• Was ist der Lebenszyklus von Promises? Mittels welcher Funktionen werden Promises
+verarbeitet? Wie können diese miteinander verkettet werden?
+Lebenszyklus:
+Jedes Promise durchläuft einen kurzen Lebenszyklus und beginnt im "pending" Zustand. 
+Dies bedeutet, dass der asynchrone Vorgang noch nicht abgeschlossen ist. Ein pending promise gilt als nicht erledigt.
+Wenn der asynchrone Vorgang abgeschlossen ist, gilt das Promise als erfüllt(" settled") und gibt einen von 
+zwei möglichen Zuständen ein:
+
+Fulfilled: Der asynchrone Vorgang des Versprechens wurde erfolgreich abgeschlossen.
+Rejected: Der asynchrone Vorgang des Versprechens wurde aufgrund eines Fehlers oder einer 
+anderen Ursache nicht erfolgreich abgeschlossen.
+
+mittels der then()-funktion kann man funktionen miteinander verketten
+
+Promise.reject(reason)
+Gibt einen Promise zurück, der mit dem angegeben Grund (reason) verworfen wird.
+Promise.resolve(value)
+Gibt einen Promise zurück, der mit value aufgelöst wird. 
+Falls der Wert ein thenable ist (Objekt besitzt eine then-Methode), 
+folgt der zurückgegebene Promise dem thenable und übernimmt den Status. 
+Andernfalls wird der zurückgegebene Promise auf fulfilled gesetzt
+
+• Wie erstellt man eigene Funktionen, die ein Promise zurückgeben?
+
+• Was sind die Vorteile von Promises?
+Keine Umkehrung der Kontrolle: Ähnlich wie bei synchronem Code geben Promise-basierte Funktionen Ergebnisse zurück, 
+sie führen (direkt) nicht die Ausführung über Callbacks aus und steuern sie. Das heißt, der Anrufer behält die Kontrolle.
+Das Verketten ist einfacher: Wenn der Rückruf von then () eine Promise zurückgibt 
+(z. B. das Ergebnis des Aufrufs einer anderen Promise-basierten Funktion), dann gibt then() diese Promise zurück 
+
+
+
+
+
+
+
